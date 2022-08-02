@@ -13,6 +13,8 @@ app.use(
     })
   );
 
+app.use("/api", require("./routes/routes"))
+
 app.listen(PORT, () => {
     console.log(`Server has been started on port ${PORT}`)
 })
