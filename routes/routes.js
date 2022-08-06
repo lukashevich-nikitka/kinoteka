@@ -21,7 +21,7 @@ router.post("/auth", async (req, res) => {
         }
       }
     );
-    console.log('here')
+    res.json("Вы успешно прошли регистрацию!")
   }
 });
 
