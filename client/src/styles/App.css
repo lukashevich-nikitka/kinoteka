@@ -1,0 +1,24 @@
+.nav-list {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+  }
+  
+  ul {
+    list-style-type: none;
+  }
+  
+  a {
+    font-size: 40px;
+    color: lightgrey;
+    text-decoration: none;
+    transition: 0.5s;
+  }
+  
+  .link:hover {
+    text-decoration: underline;
+  }
+  
+  .error-modale {
+    margin: 0 auto;
+  }
