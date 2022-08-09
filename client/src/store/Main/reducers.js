@@ -1,14 +1,18 @@
 /* eslint-disable no-param-reassign */
 import { createReducer } from '@reduxjs/toolkit';
-import getFilmsList from './thunks';
+import filmThunks from './thunks';
 
 const initialState = {
   films: [],
+  userRights: { name: 'Неизвестный пользователь', role: 'unknown' },
 };
 
 const mainReducer = createReducer(initialState, {
-  [getFilmsList.fulfilled]: (state, action) => {
+  [filmThunks.getFilmsList.fulfilled]: (state, action) => {
     state.films = action.payload;
+  },
+  [filmThunks.getUserRights.fulfilled]: (state, action) => {
+    state.userRights = action.payload;
   },
 });
 

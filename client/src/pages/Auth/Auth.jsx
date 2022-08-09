@@ -8,7 +8,7 @@ import registrNewUser from '../../store/Auth/thunks';
 function Auth() {
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
-  const registrInfo = useSelector((state) => state.registrAnswer);
+  const registrInfo = useSelector((state) => state.auth.registrAnswer);
   const onSubmit = (data) => dispatch(registrNewUser(data));
   return (
     <>
