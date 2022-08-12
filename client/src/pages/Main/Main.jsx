@@ -12,6 +12,7 @@ function Main() {
   useEffect(() => {
     dispatch(filmThunks.getUserRights(token));
     dispatch(filmThunks.getFilmsList());
+    dispatch(filmThunks.saveComment());
   }, [dispatch, token]);
   const filmList = useSelector((state) => state.main.films);
   const user = useSelector((state) => state.main.userRights);
@@ -27,7 +28,10 @@ function Main() {
         {filmList.map((_, index) => (
           <>
             <Film key={index} index={index} />
-            <div className="comments">В этом блоке буду отображать комментарии</div>
+            <div className="comments">
+              <label htmlFor="comment">Write your comment here:</label>
+              <input id="pass" />
+            </div>
           </>
         ))}
       </div>
@@ -36,13 +40,16 @@ function Main() {
     return (
       <>
         <div className="add-film-wrapper">
-          <Button type="submit" size="large" variant="outlined">Add new film</Button>
+          <Button type="submit" size="medium" variant="outlined">Add new film</Button>
         </div>
         <div className="films-wrapper">
           {filmList.map((_, index) => (
             <>
               <Film key={index} index={index} />
-              <div className="comments">В этом блоке буду отображать комментарии</div>
+              <div className="comments">
+                <label htmlFor="comment">Write your comment here:</label>
+                <input id="pass" />
+              </div>
             </>
           ))}
         </div>

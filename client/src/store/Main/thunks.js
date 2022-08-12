@@ -21,9 +21,18 @@ const getUserRights = createAsyncThunk(
   },
 );
 
+const saveComment = createAsyncThunk(
+  'films/saveComments',
+  async (filmInfo) => {
+    const response = await axios.post('http://localhost:4200/api/saveComment', filmInfo);
+    return response.data;
+  },
+);
+
 const filmThunks = {
   getFilmsList,
   getUserRights,
+  saveComment,
 };
 
 export default filmThunks;

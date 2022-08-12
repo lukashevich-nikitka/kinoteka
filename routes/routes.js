@@ -49,20 +49,38 @@ router.get("/userRights/:token", async (req, res) => {
   console.log(`token: ${req.params.token}`)
   if (req.params.token !== 'unknown') {
     let personRole = jwt.verify(req.params.token, secretKey);
-  res.json(personRole);
+    res.json(personRole);
   } else {
-    personRole = { name: 'Неизвестный пользователь', role: 'unknown'}
+    personRole = { name: 'Неизвестный пользователь', role: 'unknown' }
     res.json(personRole);
   }
 })
 
-router.post("/addFilm", async (req, res) => {
-  if (some((el) => el.name === req.body.name)) {
-    res.json("Фильм с таким названием уже существует!")
-  } else {
-    fs.writeFile("databases/films.json", JSON.stringify([...films, req.body]));
-    res.json("Фильм опубликован!")
+router.post("/saveComment", async (res, req) => {
+  if ([...films].some((el) => req.body.name === el.name)) {
+    const index = [...films].findIndex((el) => el.name === req.body.name);
+    const filmsArray = [...films];
+    filmsArray[index].comments = [...filmsArray[index].comments, req.body.comment];
+    fs.writeFile(
+      "databases/films",
+      JSON.stringify(filmsArray),
+      (err) => {
+        if (err) {
+          console.log(err);
+        }
+      }
+    )
+    res.json([...filmsArray[index].comments])
   }
 })
+
+// router.post("/addFilm", async (req, res) => {
+//   if (some((el) => el.name === req.body.name)) {
+//     res.json("Фильм с таким названием уже существует!")
+//   } else {
+//     fs.writeFile("databases/films.json", JSON.stringify([...films, req.body]));
+//     res.json("Фильм опубликован!")
+//   }
+// })
 
 module.exports = router;

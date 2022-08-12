@@ -5,6 +5,7 @@ import filmThunks from './thunks';
 const initialState = {
   films: [],
   userRights: { name: 'Неизвестный пользователь', role: 'unknown' },
+  comments: ['Отличный фильм'],
 };
 
 const mainReducer = createReducer(initialState, {
@@ -13,6 +14,9 @@ const mainReducer = createReducer(initialState, {
   },
   [filmThunks.getUserRights.fulfilled]: (state, action) => {
     state.userRights = action.payload;
+  },
+  [filmThunks.saveComment.fulfilled]: (state, action) => {
+    state.comments = action.payload;
   },
 });
 
