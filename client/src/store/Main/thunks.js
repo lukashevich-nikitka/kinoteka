@@ -29,10 +29,28 @@ const saveComment = createAsyncThunk(
   },
 );
 
+const getComments = createAsyncThunk(
+  'films/getComments',
+  async () => {
+    const response = await axios.get('http://localhost:4200/api/filmsComments');
+    return response.data;
+  },
+);
+
+const addFilm = createAsyncThunk(
+  'films/addFilm',
+  async (data) => {
+    const response = await axios.post('http://localhost:4200/api/addFilm', data);
+    return response.data;
+  },
+);
+
 const filmThunks = {
   getFilmsList,
   getUserRights,
   saveComment,
+  getComments,
+  addFilm,
 };
 
 export default filmThunks;

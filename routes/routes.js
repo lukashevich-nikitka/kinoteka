@@ -56,13 +56,14 @@ router.get("/userRights/:token", async (req, res) => {
   }
 })
 
-router.post("/saveComment", async (res, req) => {
-  if ([...films].some((el) => req.body.name === el.name)) {
+router.post("/saveComment", async (req, res) => {
+  if ([...films].some((el) => el.name === req.body.name)) {
     const index = [...films].findIndex((el) => el.name === req.body.name);
     const filmsArray = [...films];
-    filmsArray[index].comments = [...filmsArray[index].comments, req.body.comment];
+    filmsArray[index].comments = [...filmsArray[index].comments, req.body.comment ];
+    res.json({currentComments: [...filmsArray[index].comments], index: index });
     fs.writeFile(
-      "databases/films",
+      "databases/films.json",
       JSON.stringify(filmsArray),
       (err) => {
         if (err) {
@@ -70,17 +71,23 @@ router.post("/saveComment", async (res, req) => {
         }
       }
     )
-    res.json([...filmsArray[index].comments])
   }
 })
 
-// router.post("/addFilm", async (req, res) => {
-//   if (some((el) => el.name === req.body.name)) {
-//     res.json("Фильм с таким названием уже существует!")
-//   } else {
-//     fs.writeFile("databases/films.json", JSON.stringify([...films, req.body]));
-//     res.json("Фильм опубликован!")
-//   }
-// })
+router.get("/filmsComments", async (req, res) => {
+  const defaultCommentsList = [...films].map(function (el) {
+    return { name: el.name, comments: el.comments }
+  })
+  res.json(defaultCommentsList)
+})
+
+router.post("/addFilm", async (req, res) => {
+  if (some((el) => el.name === req.body.name)) {
+    res.json("Фильм с таким названием уже существует!")
+  } else {
+    fs.writeFile("databases/films.json", JSON.stringify([req.body, ...films]));
+    res.json("Фильм опубликован!")
+  }
+})
 
 module.exports = router;
