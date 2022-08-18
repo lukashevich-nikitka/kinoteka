@@ -10,7 +10,6 @@
   align-items: center;
   max-width: 640px;
   margin: 0 auto;
-  border-bottom: 3px solid black;
   padding-bottom: 20px;
 }
 
@@ -19,9 +18,36 @@
   flex-direction: column;
   gap: 20px;
   align-items: center;
+  border-bottom: 3px solid black;
 }
 
 .add-film-wrapper {
   width: fit-content;
   margin: 0 auto;
+}
+
+.add-film-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 500px;
+  margin: 0 auto;
+  margin-top: 100px;
+}
+
+.new-film-info {
+  height: 35px;
+  border-radius: 10px;
+}
+
+.description {
+  width: 100%;
+  height: 100px;
+  border-radius: 10px;
+}
+
+.add-film-block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }

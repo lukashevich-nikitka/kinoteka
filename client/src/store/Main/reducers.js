@@ -7,7 +7,6 @@ const initialState = {
   userRights: { name: 'Неизвестный пользователь', role: 'unknown' },
   comments: {},
   allComments: [],
-  newFilm: {},
 };
 
 const mainReducer = createReducer(initialState, {
@@ -24,7 +23,10 @@ const mainReducer = createReducer(initialState, {
     state.allComments = action.payload;
   },
   [filmThunks.addFilm.fulfilled]: (state, action) => {
-    state.newFilm = action.payload;
+    state.films = action.payload;
+    state.allComments = [
+      { name: action.payload[0].name, comments: action.payload[0].comments }, ...state.allComments,
+    ];
   },
 });
 

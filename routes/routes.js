@@ -60,8 +60,8 @@ router.post("/saveComment", async (req, res) => {
   if ([...films].some((el) => el.name === req.body.name)) {
     const index = [...films].findIndex((el) => el.name === req.body.name);
     const filmsArray = [...films];
-    filmsArray[index].comments = [...filmsArray[index].comments, req.body.comment ];
-    res.json({currentComments: [...filmsArray[index].comments], index: index });
+    filmsArray[index].comments = [...filmsArray[index].comments, req.body.comment];
+    res.json({ currentComments: [...filmsArray[index].comments], index: index });
     fs.writeFile(
       "databases/films.json",
       JSON.stringify(filmsArray),
@@ -82,11 +82,16 @@ router.get("/filmsComments", async (req, res) => {
 })
 
 router.post("/addFilm", async (req, res) => {
-  if (some((el) => el.name === req.body.name)) {
+  if ([...films].some((el) => el.name === req.body.name)) {
     res.json("Фильм с таким названием уже существует!")
   } else {
-    fs.writeFile("databases/films.json", JSON.stringify([req.body, ...films]));
-    res.json("Фильм опубликован!")
+    fs.writeFile("databases/films.json", JSON.stringify([req.body, ...films]),
+      (err) => {
+        if (err) {
+          console.log(err);
+        }
+      });
+    res.json([req.body, ...films]);
   }
 })
 

@@ -9,7 +9,7 @@ function Film(props) {
   const comments = useSelector((state) => state.main.allComments);
   const currentComments = useSelector((state) => state.main.comments.currentComments);
   const currentIndex = useSelector((state) => state.main.comments.index);
-  if (comments.length !== 0 && index !== currentIndex) {
+  if (comments.length && index !== currentIndex) {
     return (
       <div className="film-container">
         <div className="film-info">
