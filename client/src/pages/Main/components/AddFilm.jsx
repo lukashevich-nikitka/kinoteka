@@ -42,7 +42,7 @@ function AddFilm(props) {
         <div>Description: </div>
         <textarea className="description" onChange={addFilmDescription} />
       </div>
-      <button type="submit" className="add-film-button" onClick={pushFilm}>Push</button>
+      <button type="submit" className="add-film-button" onClick={pushFilm}>Publish</button>
     </div>
   );
 }

@@ -47,7 +47,7 @@ function Main({
             <div className="comments">
               <label htmlFor="comment">Write your comment here:</label>
               <input id="pass" onChange={setCommentFromInput} />
-              <button type="submit" onClick={() => pushComment(index)}>Отправить</button>
+              <button type="submit" className="push-button" onClick={() => pushComment(index)}>Send</button>
             </div>
           </>
         ))}
@@ -66,7 +66,7 @@ function Main({
               <div className="comments">
                 <label htmlFor="comment">Write your comment here:</label>
                 <input id="comment" onChange={setCommentFromInput} />
-                <button type="submit" onClick={() => pushComment(index)}>Отправить</button>
+                <button type="submit" className="push-button" onClick={() => pushComment(index)}>Send</button>
               </div>
             </>
           ))}

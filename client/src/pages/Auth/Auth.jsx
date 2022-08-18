@@ -4,14 +4,17 @@ import { TextField, Button } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 import '../../styles/Auth.css';
 import registrNewUser from '../../store/Auth/thunks';
+import Success from './components/Success';
+import EmailError from './components/EmailError';
+import UnknownError from './components/UnknownError';
 
 function Auth() {
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
-  const registrInfo = useSelector((state) => state.auth.registrAnswer);
+  const registerInfo = useSelector((state) => state.auth.registrAnswer);
   const onSubmit = (data) => dispatch(registrNewUser(data));
-  return (
-    <>
+  if (registerInfo === '') {
+    return (
       <form className="auth-form-wrapper" onSubmit={handleSubmit(onSubmit)}>
         <div>Create an account</div>
         <TextField
@@ -44,9 +47,13 @@ function Auth() {
           Create
         </Button>
       </form>
-      <div>{registrInfo}</div>
-    </>
-  );
+    );
+  } if (registerInfo === 'Вы успешно прошли регистрацию!') {
+    return <Success />;
+  } if (registerInfo === 'Пользователь с таким email уже существует!') {
+    return <EmailError />;
+  }
+  return <UnknownError />;
 }
 
 export default Auth;
